@@ -3,6 +3,7 @@ const form = document.getElementById('form-cadastro');
 const inputNomeCadastro = document.getElementById('nome-cadastro');
 const inputTelCadastro = document.getElementById('tel-cadastro');
 const inputEmailCadastro = document.getElementById('email-cadastro');
+const nome = [];
 
 let linhas = '';
 let formEValido = false;
@@ -51,15 +52,24 @@ inputNomeCadastro.addEventListener('keyup', function(e) {
 });
 
 function adicionaLinha() {
+    if (nome.includes(inputNomeCadastro.value)){
+        alert(`O contato de ${inputNomeCadastro.value} já foi cadastrado`);
+        const mensagemDeSucesso = document.querySelector('.success-message');
+        mensagemDeSucesso.innerHTML = mensagemSucesso;
+        mensagemDeSucesso.style.display = 'none';
+        } else {
+            nome.push(inputNomeCadastro.value);
 
-    let linha = '<tr>';
-    linha += `<td>${inputNomeCadastro.value}</td>`;
-    linha += `<td>${inputTelCadastro.value}</td>`;
-    linha += `<td>${inputEmailCadastro.value}</td>`
-    linha += '</tr>';
+        
+            let linha = '<tr>';
+            linha += `<td>${inputNomeCadastro.value}</td>`;
+            linha += `<td>${inputTelCadastro.value}</td>`;
+            linha += `<td>${inputEmailCadastro.value}</td>`
+            linha += '</tr>';
 
-    linhas += linha;
+            linhas += linha;
 
+    }
 }
 function atualizarTabela() {
     const corpoTabela = document.querySelector('tbody');
